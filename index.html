@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioGenius AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        body { @apply bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center; }
+        .container { @apply bg-white p-8 rounded-lg shadow-xl max-w-lg w-full; }
+        input, textarea, button { @apply mt-2 block w-full p-3 border border-gray-300 rounded-md; }
+        button { @apply bg-blue-500 text-white cursor-pointer hover:bg-blue-600; }
+        #results { @apply mt-4 p-4 bg-gray-100 border border-gray-200 rounded-md; }
+        .bio-card { @apply bg-white p-3 mb-2 rounded-md shadow-sm flex justify-between items-center; }
+        .copy-btn { @apply bg-green-500 text-white px-3 py-1 rounded-md text-sm hover:bg-green-600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center mb-6">BioGenius AI</h1>
+        <p class="text-center text-gray-600 mb-6">Craft the perfect Instagram bio with AI!</p>
+        <input type="text" id="keywordsInput" placeholder="e.g., travel blogger, student, baker">
+        <button id="generateBtn">Generate Bios</button>
+        <div id="results"></div>
+        <p class="text-center text-sm text-gray-500 mt-6">Ready to upgrade your presence? Just $4.99</p>
+        <button class="bg-purple-600 hover:bg-purple-700">Get BioGenius</button>
+    </div>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const keywords = document.getElementById('keywordsInput').value;
+            if (!keywords) return;
+            document.getElementById('results').innerHTML = '<p class="text-center text-gray-500">Generating...</p>';
+            // In a real app, this would call a backend API.
+            // For this demo, static results:
+            const dummyBios = [
+                `Wanderer ✈️ | Storyteller ✨ | Capturing moments, creating memories.`, 
+                `Student by day 📚, dream chaser by night 🌙. Learning, growing, always curious.`,
+                `Homemade happiness  baking since '98 🍰 | Coffee lover ☕ | Spreading joy, one bite at a time.`
+            ];
+            let html = '';
+            dummyBios.forEach(bio => {
+                html += `<div class="bio-card"><span>${bio}</span><button class="copy-btn" onclick="navigator.clipboard.writeText('${bio.replace(/'/g, "\\'")}')">Copy</button></div>`;
+            });
+            document.getElementById('results').innerHTML = html;
+        });
+    </script>
+</body>
+</html>
