@@ -1,11 +1,20 @@
 # BioGenius AI
 
-Craft the perfect Instagram bio effortlessly with AI! BioGenius AI helps you generate creative and engaging bios based on your keywords. Simply input what defines you, and get several unique suggestions with emojis to instantly elevate your online presence. Copy your favorite with a single click!
+Craft personalized, catchy Instagram bios with the power of Artificial Intelligence. Simply input your keywords, industry, desired tone, and call to action.
 
-**Features:**
+## Features
 - AI-powered bio generation
-- Multiple variations & emoji suggestions
-- Easy one-click copy function
-- Simple, intuitive interface
+- Customizable inputs for keywords, industry, tone, and CTA
+- Clean and intuitive interface
 
-Perfect for social media users, influencers, small businesses, and anyone looking for a fresh online look.
+## Get Started
+Visit [your-app-url.com] to try it out!
+
+## Development
+This project uses a simple HTML/Tailwind CSS frontend for demonstration. A full implementation would involve:
+- React/Next.js frontend.
+- A Node.js/Serverless backend to manage API calls to GPT-3/4.
+- Stripe integration for payments.
+
+## Contribute
+Feel free to fork and enhance!
