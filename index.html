@@ -3,70 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioGenius AI</title>
+    <title>BioGenius AI - Instagram Bio Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; }
-        .container { max-width: 768px; margin: 0 auto; padding: 2rem; }
-        input, textarea, select { border: 1px solid #ccc; padding: 0.5rem; border-radius: 0.25rem; width: 100%; margin-bottom: 1rem; }
-        button { background-color: #4CAF50; color: white; padding: 0.75rem 1rem; border-radius: 0.25rem; cursor: pointer; }
-        .bio-output { background-color: #f0f0f0; padding: 1rem; border-radius: 0.25rem; min-height: 80px; word-wrap: break-word; }
+        body { font-family: 'Inter', sans-serif; }
+        .container { max-width: 768px; }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="container bg-white shadow-lg rounded-lg mt-10">
-        <h1 class="text-3xl font-bold text-center mb-6">BioGenius AI</h1>
-        <p class="text-center text-gray-600 mb-8">Craft the perfect Instagram bio with AI!</p>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
+    <div class="container bg-white rounded-lg shadow-xl p-8 space-y-6 text-center">
+        <h1 class="text-4xl font-bold text-gray-800">BioGenius AI</h1>
+        <p class="text-lg text-gray-600">Craft the perfect Instagram bio with AI!</p>
         
-        <div class="mb-4">
-            <label for="keywords" class="block text-gray-700 text-sm font-bold mb-2">Keywords (e.g., photographer, traveler):</label>
-            <input type="text" id="keywords" placeholder="Enter keywords separated by commas">
-        </div>
-
-        <div class="mb-4">
-            <label for="tone" class="block text-gray-700 text-sm font-bold mb-2">Desired Tone:</label>
-            <select id="tone">
-                <option value="witty">Witty</option>
+        <div class="space-y-4">
+            <input type="text" id="keywords" placeholder="Keywords (e.g., travel, food, tech)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+            <select id="style" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <option value="funny">Funny</option>
                 <option value="professional">Professional</option>
-                <option value="inspiring">Inspiring</option>
-                <option value="casual">Casual</option>
+                <option value="inspirational">Inspirational</option>
+                <option value="quirky">Quirky</option>
             </select>
+            <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Generate Bio
+            </button>
+        </div>
+        
+        <div id="result" class="mt-6 p-4 bg-gray-100 border border-gray-200 rounded-md text-left text-gray-700 min-h-[80px] flex items-center justify-center break-words">
+            <p class="text-gray-500 italic">Your amazing bio will appear here!</p>
         </div>
 
-        <button onclick="generateBio()" class="w-full">Generate Bio</button>
-
-        <div class="mt-8">
-            <h2 class="text-xl font-bold mb-4">Your AI-Generated Bio:</h2>
-            <div id="bioOutput" class="bio-output"></div>
-        </div>
-         <div class="text-center mt-6">
-            <p class="text-gray-600">Ready for more? Get unlimited bios for just $9.99!</p>
-            <button onclick="checkout()" class="mt-4 bg-purple-600 hover:bg-purple-700">Buy Now</button>
-        </div>
+        <p class="text-sm text-gray-500 mt-6">Powered by AI. Create unlimited bios with BioGenius AI!</p>
     </div>
     <script>
-        async function generateBio() {
+        // Placeholder for future JavaScript logic (API call, payment integration)
+        document.getElementById('generateBtn').addEventListener('click', function() {
             const keywords = document.getElementById('keywords').value;
-            const tone = document.getElementById('tone').value;
-            document.getElementById('bioOutput').textContent = 'Generating...';
+            const style = document.getElementById('style').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (keywords.trim() === '') {
+                resultDiv.innerHTML = '<p class="text-red-500">Please enter some keywords!</p>';
+                return;
+            }
 
-            // In a real app, this would be an API call to your backend/OpenAI
-            // For this static page, we'll simulate a response.
+            resultDiv.innerHTML = '<p class="text-gray-500 italic">Generating your bio...</p>';
+            // In a real app, this would make an API call to a backend service like:
+            // fetch('/api/generate-bio', { method: 'POST', body: JSON.stringify({ keywords, style }) })
+            // .then(response => response.json())
+            // .then(data => resultDiv.innerHTML = `<p>${data.bio}</p>`)
+            // .catch(error => resultDiv.innerHTML = '<p class="text-red-500">Error generating bio.</p>');
+            
+            // Simulate AI response
             setTimeout(() => {
-                const simulatedBios = {
-                    witty: "Explorer 🌍 | Coffee Addict ☕ | Probably thinking about pizza 🍕. Let's connect!",
-                    professional: "Content Creator | Brand Strategist | Helping businesses shine online. DM for collaborations.",
-                    inspiring: "Dreamer, Doer, Believer ✨. Spreading positivity and chasing sunsets. Join my journey!",
-                    casual: "Just a person tryna live their best life. Good vibes only. 😄"
-                };
-                document.getElementById('bioOutput').textContent = simulatedBios[tone] || "Your unique bio goes here!";
+                resultDiv.innerHTML = `<p>✨ ${keywords.split(',')[0].trim().toUpperCase()} enthusiast | ${style} vibe | Let's connect! 👇</p>`;
             }, 1500);
-        }
-
-        function checkout() {
-            alert('Redirecting to secure checkout for $9.99. (Stripe integration would go here!)');
-            // In a real app, this would initiate a Stripe checkout session.
-        }
+        });
     </script>
 </body>
 </html>
