@@ -3,61 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioGenius AI - Instagram Bio Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>AI Bio Generator</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .container { max-width: 768px; }
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #5C6BC0; }
+        textarea, input[type="text"] { width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background-color: #5C6BC0; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #3F51B5; }
+        #result { margin-top: 20px; padding: 15px; background: #e8eaf6; border-left: 5px solid #5C6BC0; border-radius: 4px; min-height: 50px; }
+        #loading { display: none; text-align: center; margin-top: 10px; color: #5C6BC0; }
     </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
-    <div class="container bg-white rounded-lg shadow-xl p-8 space-y-6 text-center">
-        <h1 class="text-4xl font-bold text-gray-800">BioGenius AI</h1>
-        <p class="text-lg text-gray-600">Craft the perfect Instagram bio with AI!</p>
-        
-        <div class="space-y-4">
-            <input type="text" id="keywords" placeholder="Keywords (e.g., travel, food, tech)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-            <select id="style" class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                <option value="funny">Funny</option>
-                <option value="professional">Professional</option>
-                <option value="inspirational">Inspirational</option>
-                <option value="quirky">Quirky</option>
-            </select>
-            <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Generate Bio
-            </button>
-        </div>
-        
-        <div id="result" class="mt-6 p-4 bg-gray-100 border border-gray-200 rounded-md text-left text-gray-700 min-h-[80px] flex items-center justify-center break-words">
-            <p class="text-gray-500 italic">Your amazing bio will appear here!</p>
-        </div>
-
-        <p class="text-sm text-gray-500 mt-6">Powered by AI. Create unlimited bios with BioGenius AI!</p>
+<body>
+    <div class="container">
+        <h1>AI Instagram Bio Generator</h1>
+        <p>Craft the perfect bio with AI. Describe yourself, add keywords, or choose a desired tone.</p>
+        <textarea id="userInput" rows="4" placeholder="e.g., 'Travel blogger, foodie, adventurer, witty, inspiring' or 'Entrepreneur, helping startups grow, professional, concise'"></textarea>
+        <button onclick="generateBio()">Generate Bio</button>
+        <div id="loading">Generating...</div>
+        <div id="result">Your AI-generated bio will appear here.</div>
+        <p style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #777;">Powered by AI. <a href="#" onclick="alert('Payment integration coming soon! This is a demo.')">Get unlimited generations!</a></p>
     </div>
     <script>
-        // Placeholder for future JavaScript logic (API call, payment integration)
-        document.getElementById('generateBtn').addEventListener('click', function() {
-            const keywords = document.getElementById('keywords').value;
-            const style = document.getElementById('style').value;
+        async function generateBio() {
+            const userInput = document.getElementById('userInput').value;
             const resultDiv = document.getElementById('result');
-            
-            if (keywords.trim() === '') {
-                resultDiv.innerHTML = '<p class="text-red-500">Please enter some keywords!</p>';
+            const loadingDiv = document.getElementById('loading');
+
+            if (userInput.trim() === '') {
+                resultDiv.innerText = 'Please enter some keywords or a description.';
                 return;
             }
 
-            resultDiv.innerHTML = '<p class="text-gray-500 italic">Generating your bio...</p>';
-            // In a real app, this would make an API call to a backend service like:
-            // fetch('/api/generate-bio', { method: 'POST', body: JSON.stringify({ keywords, style }) })
-            // .then(response => response.json())
-            // .then(data => resultDiv.innerHTML = `<p>${data.bio}</p>`)
-            // .catch(error => resultDiv.innerHTML = '<p class="text-red-500">Error generating bio.</p>');
-            
-            // Simulate AI response
+            loadingDiv.style.display = 'block';
+            resultDiv.innerText = '';
+
+            // In a real app, this would be an API call to your backend/LLM.
+            // For this demo, we simulate a response.
             setTimeout(() => {
-                resultDiv.innerHTML = `<p>✨ ${keywords.split(',')[0].trim().toUpperCase()} enthusiast | ${style} vibe | Let's connect! 👇</p>`;
+                loadingDiv.style.display = 'none';
+                const exampleBios = [
+                    `Wanderlust-filled soul ✈️ | Foodie adventures 🌮 | Inspiring stories one photo at a time. Let's connect! ✨`,
+                    `Building the future, one byte at a time. 🚀 | Startup enthusiast | Tech innovator | Lover of clean code & strong coffee.`,
+                    `Your daily dose of positivity & plant love 🌿☀️ | Spreading good vibes & mindful living. Join my journey!`
+                ];
+                const randomIndex = Math.floor(Math.random() * exampleBios.length);
+                resultDiv.innerText = exampleBios[randomIndex];
             }, 1500);
-        });
+        }
     </script>
 </body>
 </html>
