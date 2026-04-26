@@ -1,16 +1,5 @@
-# BioBoost - AI Instagram Bio Generator
+# APEX InstaBio AI
 
-BioBoost is your go-to tool for crafting perfect Instagram bios effortlessly. Simply input your keywords and desired tone, and our AI generates creative, engaging bios that stand out.
+InstaBio AI is an AI-powered web application that generates creative and personalized Instagram bios. Users input their interests, niche, and desired tone, and the app leverages OpenAI's GPT-3.5 Turbo to craft unique bios.
 
-## Features
-- AI-powered bio generation.
-- Customizable tone (Professional, Funny, Aesthetic, etc.).
-- Simple and intuitive interface.
-
-## How to Use
-1. Enter relevant keywords about yourself or your brand.
-2. Select your preferred tone.
-3. Click 'Generate Bio!' to get a tailored Instagram bio.
-
-## Pricing
-Get instant access to unique, AI-generated bios for just $9.99.
+This project is built with Next.js (frontend) and integrates Stripe Checkout for payment processing. Deployment is handled via Vercel.
