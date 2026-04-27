@@ -1,1 +1,29 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>InstaBio AI</title><style>body{font-family:sans-serif;margin:20px;background:#f4f7f6;color: #333;}h1{color:#2c3e50;text-align:center;}#app{background:white;padding:25px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1);max-width:600px;margin:30px auto;}input,select,button,textarea{width:calc(100% - 20px);padding:10px;margin-bottom:15px;border-radius:5px;border:1px solid #ddd;}button{background:#4CAF50;color:white;cursor:pointer;font-size:16px;}button:hover{background:#45a049;}#bioOutput{white-space:pre-wrap;background:#e9ecef;padding:15px;border-radius:5px;min-height:100px;}</style></head><body><div id="app"><h1>InstaBio AI</h1><p>Generate a creative Instagram bio instantly!</p><input type="text" id="keywords" placeholder="Keywords (e.g., travel, entrepreneur)"><select id="tone"><option value="professional">Professional</option><option value="funny">Funny</option><option value="adventurous">Adventurous</option><option value="creative">Creative</option></select><button onclick="generateBio()">Generate Bio</button><div id="bioOutput">Your generated bio will appear here.</div><button onclick="checkout()">Unlock Unlimited Bios - $9.99</button></div><script>async function generateBio(){const keywords=document.getElementById('keywords').value;const tone=document.getElementById('tone').value;document.getElementById('bioOutput').innerText='Generating...';try{const response=await fetch('/api/generate-bio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({keywords,tone})});const data=await response.json();if(response.ok){document.getElementById('bioOutput').innerText=data.bio;}else{document.getElementById('bioOutput').innerText='Error: '+data.message;}}catch(error){document.getElementById('bioOutput').innerText='Network Error:'+error.message;}}function checkout(){alert('Integrating Stripe Checkout... (This is a placeholder for the actual payment integration)');}1</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioBoost AI - Instagram Bio Generator</title>
+    <meta name="description" content="Generate creative and engaging Instagram bios using AI.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✨%3C/text%3E%3C/svg%3E">
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; background-color: #f0f2f5; color: #333; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .container { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 600px; width: 100%; text-align: center; }
+        h1 { color: #333; margin-bottom: 15px; }
+        p { margin-bottom: 25px; line-height: 1.6; }
+        .cta-button { background-color: #4CAF50; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; text-decoration: none; display: inline-block; transition: background-color 0.3s ease; }
+        .cta-button:hover { background-color: #45a049; }
+        footer { margin-top: 40px; font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BioBoost AI</h1>
+        <p>Unlock the perfect Instagram bio with AI! Generate creative and engaging bios tailored to your style and audience in seconds.</p>
+        <a href="#" class="cta-button" onclick="alert('Payment integration coming soon! Stay tuned.');">Get Your AI Bio Now!</a>
+    </div>
+    <footer>
+        &copy; 2023 BioBoost AI. All rights reserved.
+    </footer>
+</body>
+</html>
