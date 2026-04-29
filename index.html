@@ -3,76 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioGenius AI</title>
-    <meta name="description" content="Generate stunning Instagram bios instantly with AI.">
+    <title>BioBoost AI</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .fade-in { animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: sans-serif; }
+        .container { max-width: 768px; }
+         textarea:focus { outline: none; border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
+         button:focus { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);}
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4 text-gray-800 bg-gradient-to-br from-indigo-50 to-purple-50">
-    <header class="mb-8 text-center">
-        <h1 class="text-5xl font-extrabold text-indigo-700">BioGenius AI</h1>
-        <p class="mt-3 text-xl text-gray-600">Craft your perfect Instagram bio in seconds.</p>
-    </header>
-    <main class="w-full max-w-lg p-8 bg-white rounded-xl shadow-2xl fade-in">
-        <form id="bio-form" class="space-y-6">
-            <div>
-                <label for="keywords" class="block text-sm font-semibold text-gray-700 mb-2">Keywords (e.g., tech, travel, foodie)</label>
-                <input type="text" id="keywords" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition duration-200" placeholder="Enter comma-separated keywords" required>
-            </div>
-            <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-200 shadow-md font-bold text-lg">
-                Generate Bios
-            </button>
-        </form>
-        <div id="results" class="mt-8 space-y-4">
-            <!-- Generated bios will appear here -->
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="container mx-auto bg-white rounded-lg shadow-xl p-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">BioBoost AI</h1>
+        <p class="text-center text-gray-600 mb-8">Craft the perfect Instagram bio with AI. Just tell us what you're about!</p>
+
+        <div class="mb-6">
+            <label for="keywords" class="block text-gray-700 text-sm font-bold mb-2">Keywords (e.g., travel, foodie, tech):</label>
+            <input type="text" id="keywords" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="photographer, dog lover, optimist">
         </div>
-        <div id="loading" class="hidden mt-4 text-center text-indigo-500">
-            <p>Generating amazing bios...</p>
+
+        <div class="mb-8">
+            <label for="tone" class="block text-gray-700 text-sm font-bold mb-2">Desired Tone:</label>
+            <select id="tone" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="professional">Professional</option>
+                <option value="funny">Funny</option>
+                <option value="aesthetic">Aesthetic</option>
+                <option value="motivational">Motivational</option>
+                <option value="creative">Creative</option>
+            </select>
         </div>
-        <div id="error" class="hidden mt-4 text-center text-red-500">
-            <p>Oops! Something went wrong. Please try again.</p>
+
+        <button id="generateBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg w-full transition duration-300 ease-in-out">
+            Generate My Bio
+        </button>
+
+        <div id="result" class="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-lg hidden">
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">Your AI-Powered Bio:</h2>
+            <p id="bioOutput" class="text-gray-700 whitespace-pre-wrap"></p>
         </div>
-    </main>
+
+        <div class="mt-8 text-center text-sm text-gray-500">
+            Powered by AI. &copy; 2023 BioBoost AI.
+        </div>
+    </div>
 
     <script>
-        document.getElementById('bio-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        document.getElementById('generateBtn').addEventListener('click', async () => {
             const keywords = document.getElementById('keywords').value;
-            const resultsDiv = document.getElementById('results');
-            const loadingDiv = document.getElementById('loading');
-            const errorDiv = document.getElementById('error');
+            const tone = document.getElementById('tone').value;
+            const resultDiv = document.getElementById('result');
+            const bioOutput = document.getElementById('bioOutput');
 
-            resultsDiv.innerHTML = '';
-            loadingDiv.classList.remove('hidden');
-            errorDiv.classList.add('hidden');
+            // Simulate API call for demonstration (replace with actual API call)
+            bioOutput.textContent = 'Generating a cool bio for you...';
+            resultDiv.classList.remove('hidden');
 
             try {
-                // In a real app, this would be an API call to a backend service that calls OpenAI
-                const mockBios = [
-                    `Wanderlust-fueled adventurer 🌍 | Code wizard 💻 | Coffee aficionado ☕ | Living life one byte at a time.`, 
-                    `Passionate storyteller ✨ | Embracing the chaos & beauty of life | Connect with me for daily inspiration.`, 
-                    `Future is bright, coffee is strong. Building dreams & breaking barriers. Let's create something amazing.`, 
-                    `Foodie, fitness enthusiast, and proud plant parent. Spreading positivity & good vibes.`
-                ];
-                
-                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
-
-                mockBios.forEach(bio => {
-                    const bioCard = document.createElement('div');
-                    bioCard.className = 'p-4 bg-gray-50 rounded-lg border border-gray-200 text-gray-700 text-sm fade-in';
-                    bioCard.textContent = bio;
-                    resultsDiv.appendChild(bioCard);
+                // This would be your API endpoint
+                const response = await fetch('/api/generate-bio', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ keywords, tone }),
                 });
-
+                const data = await response.json();
+                if (data.bio) {
+                    bioOutput.textContent = data.bio;
+                } else {
+                    bioOutput.textContent = 'Could not generate a bio. Please try again.';
+                }
             } catch (error) {
-                console.error("Error generating bio:", error);
-                errorDiv.classList.remove('hidden');
-            } finally {
-                loadingDiv.classList.add('hidden');
+                console.error('Error:', error);
+                bioOutput.textContent = 'An error occurred. Please try again later.';
             }
         });
     </script>
