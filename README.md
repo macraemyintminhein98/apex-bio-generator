@@ -1,14 +1,19 @@
-# AI Instagram Bio Generator
+# BioGenius AI
 
-Craft personalized and catchy Instagram bios in an instant! Simply input your interests and desired vibe, and our AI will generate a unique bio for you. Perfect for influencers, businesses, or anyone looking to refresh their social media presence.
+**Craft your perfect Instagram bio in seconds with AI!**
+
+BioGenius AI is a web application that generates creative, personalized Instagram bios based on your keywords and preferred style. Whether you're a photographer, traveler, foodie, or dog lover, our AI will help you stand out. 
 
 ## Features:
-- AI-powered bio generation
-- Customizable inputs (interests, vibe)
-- User-friendly interface
+- **Keyword-based generation:** Input what defines you.
+- **Style selection:** Choose from professional, quirky, inspirational, or minimalist.
+- **Instant results:** Get multiple bio options delivered quickly.
+- **Simple & intuitive interface.**
 
-## Get Started:
-Visit our web application (which will be hosted on Vercel) to generate your bio. Secure payment via Stripe for one-time access to the full functionality.
+## How it works:
+1. Enter your keywords (e.g., "photographer, travel, dog mom").
+2. Select your desired bio style.
+3. Make a secure payment.
+4. Receive unique bio suggestions instantly!
 
-## Pricing:
-$9.99 for a one-time purchase.
+Perfect for social media users, influencers, and small businesses looking to enhance their online presence.
