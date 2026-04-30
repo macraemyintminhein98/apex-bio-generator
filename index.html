@@ -3,71 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioGenius AI</title>
+    <title>BioBoost AI</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f3f4f6; font-family: sans-serif; }
-        .container { max-width: 600px; margin: 4rem auto; padding: 2rem; background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-        .btn { padding: 0.75rem 1.5rem; border-radius: 0.375rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
-        .btn-primary { background-color: #4f46e5; color: white; border: none; }
-        .btn-primary:hover { background-color: #4338ca; }
-        .input-field { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; }
-        .output-box { min-height: 100px; background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.375rem; padding: 1rem; margin-top: 1rem; word-wrap: break-word; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; }
+        .container { max-width: 600px; margin: 2rem auto; padding: 2rem; background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .cta-button { background-color: #0d9488; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease; }
+        .cta-button:hover { background-color: #067f74; }
+        .copy-button { background-color: #60a5fa; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; cursor: pointer; transition: background-color 0.3s ease; }
+        .copy-button:hover { background-color: #3b82f6; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1 class="text-3xl font-extrabold text-center mb-6 text-gray-800">🌟 BioGenius AI 🌟</h1>
-        <p class="text-center text-gray-600 mb-8">Generate stunning Instagram bios instantly!</p>
-        <div class="mb-4">
-            <label for="keywords" class="block text-sm font-medium text-gray-700 mb-2">Enter keywords (e.g., photographer, travel, entrepreneur):</label>
-            <input type="text" id="keywords" class="input-field" placeholder="e.g., foodie, adventurer, digital nomad">
-        </div>
-        <button id="generateBtn" class="btn btn-primary w-full">Generate Bio</button>
-        <div id="output" class="output-box text-gray-700">Your generated bio will appear here.</div>
-        <button id="copyBtn" class="btn bg-gray-200 text-gray-700 hover:bg-gray-300 w-full mt-4" style="display: none;">Copy to Clipboard</button>
-        <p class="text-center text-sm text-gray-500 mt-6">Powered by AI.</p>
-    </div>
-    <script>
-        const generateBtn = document.getElementById('generateBtn');
-        const keywordsInput = document.getElementById('keywords');
-        const outputDiv = document.getElementById('output');
-        const copyBtn = document.getElementById('copyBtn');
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+    <div class="container text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">BioBoost AI</h1>
+        <p class="text-gray-600 mb-6">Craft your perfect Instagram bio with AI. Just tell us about yourself!</p>
+        
+        <input id="keywords-input" type="text" placeholder="e.g., travel blogger, fitness, entrepreneur" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400">
+        
+        <button id="generate-button" class="cta-button">Generate Bios</button>
 
-        generateBtn.addEventListener('click', async () => {
+        <div id="results" class="mt-8 space-y-4 hidden">
+            <h2 class="text-2xl font-semibold text-gray-700">Your AI-Generated Bios:</h2>
+            <div id="bio-list" class="border border-gray-200 p-4 rounded-md bg-gray-50"></div>
+        </div>
+
+        <p id="loading-message" class="mt-4 text-teal-600 hidden">Generating amazing bios...</p>
+        <p id="error-message" class="mt-4 text-red-600 hidden">Oops! Something went wrong. Please try again.</p>
+
+        <p class="text-sm text-gray-500 mt-8">Powered by intelligent AI. Quick, creative, effective.</p>
+    </div>
+
+    <script>
+        const keywordsInput = document.getElementById('keywords-input');
+        const generateButton = document.getElementById('generate-button');
+        const resultsDiv = document.getElementById('results');
+        const bioListDiv = document.getElementById('bio-list');
+        const loadingMessage = document.getElementById('loading-message');
+        const errorMessage = document.getElementById('error-message');
+
+        generateButton.addEventListener('click', async () => {
             const keywords = keywordsInput.value.trim();
             if (!keywords) {
-                outputDiv.textContent = 'Please enter some keywords!';
-                copyBtn.style.display = 'none';
+                alert('Please enter some keywords!');
                 return;
             }
-            
-            outputDiv.textContent = 'Generating...';
-            copyBtn.style.display = 'none';
 
-            // In a real app, this would call a backend API.
-            // For this minimal example, we'll simulate a response.
-            // Replace with actual API call to your AI model.
-            const simulatedBios = [
-                `Wanderer ✈️ | Lens Lover 📸 | Documenting life's beauty, one frame at a time. Let's connect!`, 
-                `Entrepreneur by day 🚀 | Dreamer by night ✨ | Turning ideas into reality. Join my journey!`, 
-                `Foodie 🍔🍕 | Traveler 🌍 | Sharing delicious moments and breathtaking views. Follow for inspo!`
-            ];
-            const randomBio = simulatedBios[Math.floor(Math.random() * simulatedBios.length)];
-            
-            setTimeout(() => {
-                outputDiv.textContent = randomBio; 
-                copyBtn.style.display = 'block';
-            }, 1500);
-        });
+            loadingMessage.classList.remove('hidden');
+            errorMessage.classList.add('hidden');
+            resultsDiv.classList.add('hidden');
+            bioListDiv.innerHTML = '';
 
-        copyBtn.addEventListener('click', () => {
-            const textToCopy = outputDiv.textContent;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                alert('Bio copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy text:', err);
-            });
+            try {
+                // In a real app, this would be a serverless function call.
+                // For this demo, we'll simulate it.
+                const dummyBios = [
+                    "Wanderlust & good vibes ✨ Travel blogger sharing adventures & tips.",
+                    "Fueling my body & spirit 🏋️‍♀️ Fitness enthusiast on a journey to strength.",
+                    "Innovator. Creator. Entrepreneur. Building dreams, one idea at a time.",
+                    "Coffee lover ☕️ Digital nomad exploring the world, one byte at a time."
+                ];
+
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call delay
+
+                dummyBios.forEach(bio => {
+                    const bioItem = document.createElement('div');
+                    bioItem.className = 'flex justify-between items-center p-3 mb-2 bg-white rounded-md shadow-sm';
+                    bioItem.innerHTML = `
+                        <p class="text-gray-800 text-left">${bio}</p>
+                        <button class="copy-button" onclick="navigator.clipboard.writeText('${bio.replace(/'/g, "\\'")}')">Copy</button>
+                    `;
+                    bioListDiv.appendChild(bioItem);
+                });
+
+                resultsDiv.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error generating bios:", error);
+                errorMessage.classList.remove('hidden');
+            } finally {
+                loadingMessage.classList.add('hidden');
+            }
         });
     </script>
 </body>
